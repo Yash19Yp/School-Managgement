@@ -1,0 +1,99 @@
+/* font-family*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: "Roboto", sans-serif !important;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+.common-row {
+  flex-direction: row;
+  display: flex;
+}
+.common-column {
+  flex-direction: column;
+  display: flex;
+}
+.common-image {
+  max-width: 100%;
+}
+.common-stack {
+  position: relative;
+  flex-wrap: wrap;
+}
+.common-list {
+  display: grid;
+}
+.common-grid {
+  display: grid;
+  flex-flow: row wrap;
+  min-height: auto;
+}
+.common-button {
+  cursor: pointer;
+  outline: none;
+}
+.common-floating-button {
+  cursor: pointer;
+  outline: none;
+  position: fixed !important;
+}
+.common-pointer {
+  cursor: pointer;
+}
+
+table {
+  border-spacing: 0;
+}
+.common-select {
+  z-index: 10000;
+}
+.react-datepicker-popper {
+  z-index: 100000 !important;
+}
+.drawable-icon{
+  position: absolute;
+  margin: auto;
+  z-index: 1000;
+}
+.input-wrap{
+  position: relative;
+}
+option{
+  color: #000;
+}
+.table-wrap{
+  overflow: auto;
+}
+input:focus{
+  outline:none;
+}
+.ReactModal__Body--open{
+  overflow: hidden;
+}
+  .slider-indicator:first-child {
+    margin-left: 0;
+}
+
+.slider-indicator:last-child {
+margin-right: 0;
+}
