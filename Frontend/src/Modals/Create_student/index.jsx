@@ -1,7 +1,5 @@
 import React from "react";
 import ModalProvider from "react-modal";
-
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useForm from "../../Hooks/useForm";
 import {
@@ -13,9 +11,36 @@ import {
   Img,
   Datepicker,
 } from "../../components";
+import { CREATE_STUDENT } from "../../service/api";
 import * as yup from "yup";
 import CancelIcon from "../../assets/icons/cancel.png";
 const StudentModal = (props) => {
+  const form = useForm(
+    {
+      first_name: "",
+      middle_name: "",
+      last_name: "",
+      dob: "",
+      parent_name: "",
+      parent_mail: "",
+      parent_number: "",
+    },
+    {
+      validate: false,
+      validationOnChange: false,
+    }
+  );
+  function createStudentCallAPI(data) {
+    console.log("data", data);
+    const req = { data: { ...data } };
+
+    CREATE_STUDENT(req)
+      .then((res) => {})
+      .catch((err) => {
+        console.error(err);
+        toast.error("Something bad happened at the server side!");
+      });
+  }
   return (
     <ModalProvider {...props}>
       <div className="bg-bluegray_50 h-[auto] w-[auto]">
@@ -42,11 +67,11 @@ const StudentModal = (props) => {
                 className="font-medium p-[0] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[19px] placeholder:text-bluegray_200 text-black_900 w-[auto]"
                 wrapClassName="2xl:mt-[8px] 3xl:mt-[9px] lg:mt-[6px] w-[30%] xl:mt-[7px]"
                 type="text"
-                // onChange={(e) => {
-                //   form.handleChange("isin", e.target.value);
-                // }}
-                // errors={form?.errors?.isin}
-                // value={form?.values?.isin}
+                onChange={(e) => {
+                  form.handleChange("first_name", e.target.value);
+                }}
+                errors={form?.errors?.first_name}
+                value={form?.values?.first_name}
                 name="firstName"
                 placeholder="First Name"
               ></Input>
@@ -54,11 +79,11 @@ const StudentModal = (props) => {
                 className="font-medium p-[0] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[19px] placeholder:text-bluegray_200 text-black_900 w-[auto]"
                 wrapClassName="2xl:mt-[8px] 3xl:mt-[9px] lg:mt-[6px] w-[30%] xl:mt-[7px]"
                 type="text"
-                // onChange={(e) => {
-                //   form.handleChange("isin", e.target.value);
-                // }}
-                // errors={form?.errors?.isin}
-                // value={form?.values?.isin}
+                onChange={(e) => {
+                  form.handleChange("middle_name", e.target.value);
+                }}
+                errors={form?.errors?.middle_name}
+                value={form?.values?.middle_name}
                 name="middlename"
                 placeholder="Middle Name"
               ></Input>
@@ -66,11 +91,11 @@ const StudentModal = (props) => {
                 className="font-medium p-[0] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[19px] placeholder:text-bluegray_200 text-black_900 w-[auto]"
                 wrapClassName="2xl:mt-[8px] 3xl:mt-[9px] lg:mt-[6px] w-[30%] xl:mt-[7px]"
                 type="text"
-                // onChange={(e) => {
-                //   form.handleChange("isin", e.target.value);
-                // }}
-                // errors={form?.errors?.isin}
-                // value={form?.values?.isin}
+                onChange={(e) => {
+                  form.handleChange("last_name", e.target.value);
+                }}
+                errors={form?.errors?.last_name}
+                value={form?.values?.last_name}
                 name="lastName"
                 placeholder="Last Name"
               ></Input>
@@ -81,11 +106,11 @@ const StudentModal = (props) => {
               </Text>
               <Datepicker
                 className="placeholder:bg-transparent bg-white_A700 border border-bluegray_901 border-solid font-medium lg:mt-[5px] xl:mt-[6px] 2xl:mt-[7px] 3xl:mt-[8px] lg:pb-[12px] xl:pb-[14px] 2xl:pb-[16px] 3xl:pb-[19px] xl:pl-[10px] 2xl:pl-[12px] 3xl:pl-[14px] lg:pl-[9px] lg:pr-[27px] xl:pr-[31px] 2xl:pr-[35px] 3xl:pr-[42px] lg:pt-[15px] xl:pt-[17px] 2xl:pt-[20px] 3xl:pt-[24px] rounded-radius8 lg:text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[19px] placeholder:text-bluegray_200 text-black_900 w-[auto]"
-                // onChange={(e) => {
-                //   form.handleChange("expires_at", e);
-                // }}
-                // errors={form?.errors?.["expires_at"]}
-                // value={form?.values?.["expires_at"]}
+                onChange={(e) => {
+                  form.handleChange("dob", e);
+                }}
+                errors={form?.errors?.["dob"]}
+                value={form?.values?.["dob"]}
                 name="Date of Birth"
                 placeholder="Select Birth Date"
               ></Datepicker>
@@ -100,6 +125,11 @@ const StudentModal = (props) => {
                 wrapClassName="2xl:mt-[8px] 3xl:mt-[9px] lg:mt-[6px] w-[40%] xl:mt-[7px]"
                 name="parentName"
                 placeholder="Parent Name"
+                onChange={(e) => {
+                  form.handleChange("parent_name", e.target.value);
+                }}
+                errors={form?.errors?.parent_name}
+                value={form?.values?.parent_name}
               ></Input>
               <Text className="ml-[20px] lg:mt-[16px] xl:mt-[18px] 2xl:mt-[21px] 3xl:mt-[25px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[19px] w-[10%]">
                 Parent Number
@@ -110,6 +140,11 @@ const StudentModal = (props) => {
                 name="parentNumber"
                 type="number"
                 placeholder="Mobile Number"
+                onChange={(e) => {
+                  form.handleChange("parent_number", e.target.value);
+                }}
+                errors={form?.errors?.parent_number}
+                value={form?.values?.parent_number}
               ></Input>
             </Row>
             <Row className="w-[100%]">
@@ -119,10 +154,11 @@ const StudentModal = (props) => {
               <Input
                 className="font-medium p-[0] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[19px] placeholder:text-bluegray_200 text-black_900 w-[auto]"
                 wrapClassName="2xl:mt-[8px] 3xl:mt-[9px] lg:mt-[6px] w-[90%] xl:mt-[7px]"
-                // onChange={(e) => {
-                //   form.handleChange("venue", e.target.value);
-                // }}
-                // value={form?.values?.venue}
+                onChange={(e) => {
+                  form.handleChange("parent_mail", e.target.value);
+                }}
+                value={form?.values?.parent_mail}
+                errors={form?.errors?.parent_mail}
                 name="Group10198 Three"
                 placeholder="Email ID"
               ></Input>
@@ -135,7 +171,7 @@ const StudentModal = (props) => {
               <Button
                 className="bg-bluegray_400 common-pointer font-medium lg:text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[19px] text-center text-white_A700 w-[20%]"
                 onClick={() => {
-                  // form.handleSubmit(callApi1);
+                  form.handleSubmit(createStudentCallAPI);
                 }}
                 size="md"
               >
