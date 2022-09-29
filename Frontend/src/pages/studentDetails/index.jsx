@@ -30,7 +30,7 @@ function Students() {
   }, []);
 
   // Search
-  const __handleSearch = (event) => {
+  const handleSearch = (event) => {
     setSearch(event.target.value);
     if (event.target.value !== "") {
       let search_results = Student.filter(
@@ -42,12 +42,12 @@ function Students() {
       );
       setStudents(search_results);
     } else {
-      __handleChangePage(1);
+      handleChangePage(1);
     }
   };
 
   // Change Page
-  const __handleChangePage = (new_page) => {
+  const handleChangePage = (new_page) => {
     setPage(new_page);
     setStudents(sliceData(all_students, new_page, 5));
   };
@@ -68,7 +68,7 @@ function Students() {
               value={search}
               placeholder="Search.."
               className="dashboard-content-input"
-              onChange={(e) => __handleSearch(e)}
+              onChange={(e) => handleSearch(e)}
             />
           </div>
         </div>
@@ -151,7 +151,7 @@ function Students() {
               <span
                 key={index}
                 className={item === page ? "active-pagination" : "pagination"}
-                onClick={() => __handleChangePage(item)}
+                onClick={() => handleChangePage(item)}
               >
                 {item}
               </span>
